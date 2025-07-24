@@ -11,6 +11,7 @@ import Viperit
 
 
 //MARK: - Public Interface Protocol
+@MainActor
 protocol HomeViewInterface {
     func showLoading()
     func showInfo(message: String)

@@ -14,6 +14,7 @@ private class MockPresenter: Presenter {}
 private class MockInteractor: Interactor {}
 private class MockRouter: Router {}
 
+@MainActor
 class ModuleTests: XCTestCase {
     private lazy var testBundle = Bundle(for: SampleRouter.self)
     
