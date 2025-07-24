@@ -8,6 +8,7 @@
 
 import UIKit
 
+@MainActor
 public protocol UserInterfaceProtocol: AnyObject {
     var _presenter: PresenterProtocol! { get set }
     var _displayData: DisplayData? { get set }

@@ -27,38 +27,46 @@ class HomeMockView: UserInterface, HomeViewInterface {
     }
 }
 
-class HomeTests: XCTestCase {
-    
-    var view: HomeMockView!
-    var presenter: HomePresenter!
-    
-    override func setUp() {
-        super.setUp()
-        var mod = AppModules.home.build()
-        view = HomeMockView()
-        view.expectation = expectation(description: "Test expectation description")
-        presenter = mod.presenter as? HomePresenter
-        mod.injectMock(view: view)
+struct HomeMockModuleComponents {
+    let view: HomeMockView
+    let presenter: HomePresenter
+}
+
+@MainActor
+class HomeTests: XCTestCase, Sendable {
+
+    private(set) var mockModuleComponents: HomeMockModuleComponents!
+
+    override func setUp() async throws {
+        try await super.setUp()
+        await buildMockComponents()
     }
-    
+
+    private func buildMockComponents() async {
+        var mod = AppModules.home.build()
+        mockModuleComponents = .init(view: HomeMockView(), presenter: (mod.presenter as? HomePresenter)!)
+        mockModuleComponents.view.expectation = expectation(description: "Test expectation description")
+        mod.injectMock(view: mockModuleComponents.view)
+    }
+
     func expect(timeout: TimeInterval = 5, errorMessage: String = "TIMEOUT") {
         waitForExpectations(timeout: 5) { error in
             guard error != nil else { return }
             XCTFail(errorMessage)
         }
     }
-    
+
     func testShowInfo1() {
         print("---RUNNING TEST1---")
-        view.expectedMessage = "CONTENT_LOADED"
-        presenter.loadContent()
+        mockModuleComponents.view.expectedMessage = "CONTENT_LOADED"
+        mockModuleComponents.presenter.loadContent()
         expect()
     }
-    
+
     func testShowInfo2() {
         print("---RUNNING TEST2---")
-        view.expectedMessage = "CONTENT_LOADED"
-        presenter.loadContent()
+        mockModuleComponents.view.expectedMessage = "CONTENT_LOADED"
+        mockModuleComponents.presenter.loadContent()
         expect()
     }
 }

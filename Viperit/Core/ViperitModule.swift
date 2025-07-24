@@ -6,6 +6,7 @@
 //  Copyright © 2017 Ferran Abelló. All rights reserved.
 //
 
+import Combine
 import UIKit
 
 #if canImport(SwiftUI)
@@ -22,6 +23,7 @@ public enum ViperitViewType {
 }
 
 //MARK: - Viperit Module Protocol
+@MainActor
 public protocol ViperitModule {
     var viewType: ViperitViewType { get }
     var viewName: String { get }

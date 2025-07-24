@@ -9,6 +9,7 @@
 import XCTest
 import Viperit
 
+@MainActor
 class RouterTests: XCTestCase {
     private func createTestModule(forTablet: Bool = false) -> Module {
         let deviceType: UIUserInterfaceIdiom = forTablet ? .pad : .phone

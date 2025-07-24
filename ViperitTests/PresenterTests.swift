@@ -66,6 +66,7 @@ private class MockPresenter: Presenter, SamplePresenterInterface {
 }
 
 //MARK: - Presenter Tests
+@MainActor
 class PresenterTests: XCTestCase {
     private func createTestModuleWithMockPresenter(methodToTest: String) -> Module {
         var module = TestModules.sample.build(bundle: Bundle(for: SampleRouter.self))
