@@ -14,7 +14,9 @@ private class MockPresenter: Presenter {}
 private class MockInteractor: Interactor {}
 private class MockRouter: Router {}
 
+#if swift(>=6)
 @MainActor
+#endif
 class ModuleTests: XCTestCase {
     private lazy var testBundle = Bundle(for: SampleRouter.self)
     

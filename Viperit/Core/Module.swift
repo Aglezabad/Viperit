@@ -11,13 +11,17 @@ import UIKit
 
 private let kTabletSuffix = "Pad"
 
+#if swift(>=6)
 @MainActor
+#endif
 public protocol ViperitComponent {
     init()
 }
 
 //MARK: - Module
+#if swift(>=6)
 @MainActor
+#endif
 public struct Module {
     public private(set) var view: UserInterfaceProtocol
     public private(set) var interactor: InteractorProtocol
@@ -123,7 +127,9 @@ extension Module {
 //MARK: - Private Extension for Application Module generic enum
 extension RawRepresentable where RawValue == String {
 
+    #if swift(>=6)
     @MainActor
+    #endif
     func classForViperComponent(_ component: ViperComponent, bundle: Bundle, deviceType: UIUserInterfaceIdiom? = nil) -> Swift.AnyClass? {
         let className = rawValue.uppercasedFirst + component.rawValue.uppercasedFirst
         let bundleName = safeString(bundle.infoDictionary?["CFBundleName"])

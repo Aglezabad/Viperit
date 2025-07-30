@@ -8,7 +8,9 @@
 
 import UIKit
 
+#if swift(>=6)
 @MainActor
+#endif
 public protocol UserInterfaceProtocol: AnyObject {
     var _presenter: PresenterProtocol! { get set }
     var _displayData: DisplayData? { get set }

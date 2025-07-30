@@ -66,7 +66,9 @@ private class MockPresenter: Presenter, SamplePresenterInterface {
 }
 
 //MARK: - Presenter Tests
+#if swift(>=6)
 @MainActor
+#endif
 class PresenterTests: XCTestCase {
     private func createTestModuleWithMockPresenter(methodToTest: String) -> Module {
         var module = TestModules.sample.build(bundle: Bundle(for: SampleRouter.self))

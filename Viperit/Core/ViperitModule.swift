@@ -23,7 +23,9 @@ public enum ViperitViewType {
 }
 
 //MARK: - Viperit Module Protocol
+#if swift(>=6)
 @MainActor
+#endif
 public protocol ViperitModule {
     var viewType: ViperitViewType { get }
     var viewName: String { get }

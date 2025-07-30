@@ -8,7 +8,9 @@
 
 import UIKit
 
+#if swift(>=6)
 @MainActor
+#endif
 public protocol RouterProtocol: ViperitComponent {
     var _presenter: PresenterProtocol! { get set }
     var _view: UserInterfaceProtocol! { get }

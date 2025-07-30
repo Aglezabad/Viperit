@@ -9,7 +9,9 @@
 import XCTest
 import Viperit
 
+#if swift(>=6)
 @MainActor
+#endif
 class RouterTests: XCTestCase {
     private func createTestModule(forTablet: Bool = false) -> Module {
         let deviceType: UIUserInterfaceIdiom = forTablet ? .pad : .phone
